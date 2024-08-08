@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Clock</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="clock-container">
+        <div id="clock">Loading...</div>
+    </div>
+    <script>
+        function updateClock() {
+            fetch('/time')
+                .then(response => response.text())
+                .then(time => {
+                    document.getElementById('clock').textContent = time;
+                });
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to set the time immediately on load
+    </script>
+</body>
+</html>
